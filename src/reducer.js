@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 
-const charactersReducer = (characters = [], action) => {
+import { FETCH_CHARACTERS_FULFILLED } from './actions';
+
+const charactersReducer = (characters = [], { type, payload }) => {
+  if (type === FETCH_CHARACTERS_FULFILLED) {
+    return payload.characters;
+  }
+
   return characters;
 };
 

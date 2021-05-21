@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { createEpicMiddleware } from 'redux-observable';
 
 import reducer from './reducer';
-
+import rootEpic from './fetch-characters-epic';
 import FetchCharacters from './FetchCharacters';
 import Characters from './Characters';
 
 import './styles.scss';
 
-const store = createStore(reducer);
+const epicMiddleware = createEpicMiddleware();
+
+const store = createStore(reducer, applyMiddleware(epicMiddleware));
+
+epicMiddleware.run(rootEpic);
 
 const Application = () => {
   return (

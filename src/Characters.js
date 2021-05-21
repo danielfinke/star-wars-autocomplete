@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Character from './Character';
 
@@ -12,4 +13,6 @@ const Characters = ({ characters = [] }) => {
   );
 };
 
-export default Characters;
+const mapStateToProps = ({ characters }) => ({ characters });
+
+export default connect(mapStateToProps)(Characters);
